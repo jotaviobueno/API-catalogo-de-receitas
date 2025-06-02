@@ -18,6 +18,8 @@ export class RecipePresenterInterceptor implements NestInterceptor {
           return RecipePresenter.toHTTPList(data);
         }
 
+        if (typeof data === 'boolean') return data;
+
         return RecipePresenter.toHTTP(data);
       }),
     );

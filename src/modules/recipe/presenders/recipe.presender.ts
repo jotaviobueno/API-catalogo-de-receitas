@@ -1,4 +1,4 @@
-import { formatDate, formatDistanceToNow } from 'date-fns';
+import { Formatter } from 'src/common/formatter';
 import { RecipeEntity } from 'src/domain/entities';
 
 export class RecipePresenter {
@@ -6,13 +6,16 @@ export class RecipePresenter {
     return {
       ...recipe,
       createdAt: {
-        human: formatDistanceToNow(recipe.createdAt),
-        formatted: formatDate(recipe.createdAt, "dd/MM/yyyy 'às' HH:mm"),
+        human: Formatter.distanceToNow(recipe.createdAt),
+        formatted: Formatter.formatDate(
+          recipe.createdAt,
+          "dd/MM/yyyy 'às' HH:mm",
+        ),
         default: recipe.createdAt,
       },
       updatedAt: {
-        human: formatDistanceToNow(recipe.updatedAt),
-        formatted: formatDate(recipe.updatedAt, "dd/MM/yyyy 'às' HH:mm"),
+        human: Formatter.distanceToNow(recipe.updatedAt),
+        formatted: Formatter.formatDate(recipe.updatedAt),
         default: recipe.updatedAt,
       },
     };
