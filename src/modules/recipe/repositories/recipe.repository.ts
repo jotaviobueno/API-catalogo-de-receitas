@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { subHours, subMinutes } from 'date-fns';
 import { RecipeEntity } from 'src/domain/entities';
 
 @Injectable()
@@ -9,8 +10,8 @@ export class RecipeRepository {
       description: 'Como fazer um bolo de chocolate',
       ingredients: ['chocolate', 'ovos'],
       id: '1',
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt: subHours(new Date(), 1),
+      updatedAt: subMinutes(new Date(), 1),
     },
   ];
 

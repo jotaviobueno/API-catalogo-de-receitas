@@ -8,6 +8,7 @@ import {
   Param,
   Patch,
   Post,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateRecipeDto, UpdateRecipeDto } from 'src/domain/dtos';
 import { RecipeEntity } from 'src/domain/entities';
@@ -24,9 +25,11 @@ import { FindRecipeByIdUseCase } from '../use-cases/find-by-id/find-recipe-by-id
 import { FindAllRecipeUseCase } from '../use-cases/find-all/find-all-recipe.use.case';
 import { RemoveRecipeUseCase } from '../use-cases/remove/remove-recipe.use.case';
 import { UpdateRecipeUseCase } from '../use-cases/update/update-recipe.use.case';
+import { RecipePresenterInterceptor } from '../interceptors/recipe-presenter.interceptor';
 
 @ApiTags('Recipe')
 @Controller('recipe')
+@UseInterceptors(RecipePresenterInterceptor)
 export class RecipeController {
   constructor(
     private readonly createUseCase: CreateRecipeUseCase,
