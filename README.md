@@ -111,6 +111,15 @@ Execute os testes em modo watch:
 npm run test:watch
 ```
 
+## 📮 Postman Collection
+
+Para facilitar os testes da API, criei uma **[issue no repositório](https://github.com/jotaviobueno/API-catalogo-de-receitas/issues/1)** com:
+
+- 📄 **Collection do Postman** - Contém todas as requisições configuradas
+- 🌍 **Environment do Postman** - Variáveis de ambiente para produção e desenvolvimento
+
+> 💡 **Como usar**: Verifique a seção de Issues do repositório para baixar os arquivos e importar diretamente no seu Postman. As collections incluem exemplos de requisições para todos os endpoints da API.
+
 ## 🛠️ Tecnologias Utilizadas
 
 - **Node.js** - Runtime JavaScript
