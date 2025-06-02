@@ -7,10 +7,7 @@ export class RecipePresenter {
       ...recipe,
       createdAt: {
         human: Formatter.distanceToNow(recipe.createdAt),
-        formatted: Formatter.formatDate(
-          recipe.createdAt,
-          "dd/MM/yyyy 'às' HH:mm",
-        ),
+        formatted: Formatter.formatDate(recipe.createdAt),
         default: recipe.createdAt,
       },
       updatedAt: {
