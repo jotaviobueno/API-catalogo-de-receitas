@@ -41,13 +41,13 @@ export class RecipeRepository {
     return Promise.resolve(recipe);
   }
 
-  remove(id: string): Promise<void> {
+  remove(id: string): Promise<boolean> {
     const index = this.db.findIndex((recipe) => recipe.id === id);
 
     if (index !== -1) {
       this.db.splice(index, 1);
     }
 
-    return Promise.resolve();
+    return Promise.resolve(true);
   }
 }

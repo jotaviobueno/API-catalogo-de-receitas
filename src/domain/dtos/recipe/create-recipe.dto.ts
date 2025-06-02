@@ -18,3 +18,9 @@ export class CreateRecipeDto {
   @ApiProperty({ type: [String] })
   ingredients: string[];
 }
+
+export const createRecipeDtoMock: CreateRecipeDto = {
+  title: 'Bolo de chocolate',
+  description: 'Como fazer um bolo de chocolate',
+  ingredients: ['chocolate', 'ovos'],
+};

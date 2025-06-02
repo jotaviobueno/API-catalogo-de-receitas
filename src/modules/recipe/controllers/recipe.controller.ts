@@ -70,7 +70,7 @@ export class RecipeController {
   @ApiNotFoundResponse({ description: 'Recipe not found' })
   @ApiNoContentResponse()
   @HttpCode(HttpStatus.NO_CONTENT)
-  remove(@Param('id') id: string): Promise<void> {
+  remove(@Param('id') id: string): Promise<boolean> {
     return this.removeUseCase.execute(id);
   }
 }

@@ -7,7 +7,7 @@ import { FindAllRecipeUseCase } from './use-cases/find-all/find-all-recipe.use.c
 import { RemoveRecipeUseCase } from './use-cases/remove/remove-recipe.use.case';
 import { UpdateRecipeUseCase } from './use-cases/update/update-recipe.use.case';
 
-@Module({
+export const recipeModuleMock = {
   controllers: [RecipeController],
   providers: [
     RecipeRepository,
@@ -17,5 +17,7 @@ import { UpdateRecipeUseCase } from './use-cases/update/update-recipe.use.case';
     UpdateRecipeUseCase,
     RemoveRecipeUseCase,
   ],
-})
+};
+
+@Module(recipeModuleMock)
 export class RecipeModule {}

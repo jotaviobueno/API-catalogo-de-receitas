@@ -23,3 +23,12 @@ export class RecipeEntity {
     Object.assign(this, data);
   }
 }
+
+export const recipeMock: RecipeEntity = {
+  id: '1',
+  title: 'Bolo de chocolate',
+  description: 'Como fazer um bolo de chocolate',
+  ingredients: ['chocolate', 'ovos'],
+  createdAt: new Date(),
+  updatedAt: new Date(),
+};
