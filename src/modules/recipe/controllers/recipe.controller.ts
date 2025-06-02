@@ -5,14 +5,11 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Param,
   Patch,
   Post,
 } from '@nestjs/common';
-import {
-  CreateRecipeDto,
-  SearchRecipeDto,
-  UpdateRecipeDto,
-} from 'src/domain/dtos';
+import { CreateRecipeDto, UpdateRecipeDto } from 'src/domain/dtos';
 import { RecipeEntity } from 'src/domain/entities';
 import {
   ApiBody,
@@ -20,12 +17,10 @@ import {
   ApiNoContentResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
-  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { CreateRecipeUseCase } from '../use-cases/create/create-recipe.use.case';
 import { FindRecipeByIdUseCase } from '../use-cases/find-by-id/find-recipe-by-id.use.case';
-import { ResultEntity } from 'src/domain/entities/shared';
 import { FindAllRecipeUseCase } from '../use-cases/find-all/find-all-recipe.use.case';
 import { RemoveRecipeUseCase } from '../use-cases/remove/remove-recipe.use.case';
 import { UpdateRecipeUseCase } from '../use-cases/update/update-recipe.use.case';
@@ -48,37 +43,34 @@ export class RecipeController {
     return this.createUseCase.execute(createDto);
   }
 
-  @Get(':id')
+  @Get('/:id')
   @ApiNotFoundResponse({ description: 'Recipe not found' })
   @ApiOkResponse({ type: RecipeEntity })
-  findById(@Body() id: string): Promise<RecipeEntity> {
+  findById(@Param('id') id: string): Promise<RecipeEntity> {
     return this.findByIdUseCase.execute(id);
   }
 
   @Get()
-  @ApiOkResponse({ type: ResultEntity })
-  @ApiQuery({ type: SearchRecipeDto })
-  findAll(
-    @Body() queryParams: SearchRecipeDto,
-  ): Promise<ResultEntity<RecipeEntity>> {
-    return this.findAllUseCase.execute(queryParams);
+  @ApiOkResponse({ type: [RecipeEntity] })
+  findAll(): Promise<RecipeEntity[]> {
+    return this.findAllUseCase.execute();
   }
 
-  @Patch(':id')
+  @Patch('/:id')
   @ApiNotFoundResponse({ description: 'Recipe not found' })
   @ApiOkResponse({ type: RecipeEntity })
   update(
-    @Body() id: string,
+    @Param('id') id: string,
     @Body() updateDto: UpdateRecipeDto,
   ): Promise<RecipeEntity> {
     return this.updateUseCase.execute({ ...updateDto, id });
   }
 
-  @Delete(':id')
+  @Delete('/:id')
   @ApiNotFoundResponse({ description: 'Recipe not found' })
   @ApiNoContentResponse()
   @HttpCode(HttpStatus.NO_CONTENT)
-  remove(@Body() id: string): Promise<void> {
+  remove(@Param('id') id: string): Promise<void> {
     return this.removeUseCase.execute(id);
   }
 }

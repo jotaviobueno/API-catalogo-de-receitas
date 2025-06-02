@@ -1,30 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { BaseUseCase } from 'src/common/base';
-import { SearchRecipeDto } from 'src/domain/dtos';
 import { RecipeEntity } from 'src/domain/entities';
-import { ResultEntity } from 'src/domain/entities/shared';
+import { RecipeRepository } from '../../repositories/recipe.repository';
 
 @Injectable()
-export class FindAllRecipeUseCase
-  implements BaseUseCase<ResultEntity<RecipeEntity>>
-{
-  async execute(
-    queryParams: SearchRecipeDto,
-  ): Promise<ResultEntity<RecipeEntity>> {
-    const data: RecipeEntity[] = [];
+export class FindAllRecipeUseCase implements BaseUseCase<RecipeEntity[]> {
+  constructor(private readonly recipeRepository: RecipeRepository) {}
 
-    return Promise.resolve(
-      (() => {
-        const result = new ResultEntity<RecipeEntity>();
-        result.data = data;
-        result.info = {
-          total: 0,
-          page: 1,
-          pages: 1,
-          pageSize: 10,
-        };
-        return result;
-      })(),
-    );
+  async execute(): Promise<RecipeEntity[]> {
+    const recipes = await this.recipeRepository.findAll();
+
+    return recipes;
   }
 }
